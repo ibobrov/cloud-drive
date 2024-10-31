@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: db/scripts/ddl_create_table_directories.sql

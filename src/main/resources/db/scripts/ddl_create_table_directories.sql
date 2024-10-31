@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS directories (
+    id UUID PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);

@@ -4,3 +4,12 @@ server:
 spring:
   application:
     name: cloud-drive
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://${HOST_DB}:${PORT_DB}/${NAME_DB}"
+    username: ${USER_DB}
+    password: ${PASSWORD_DB}
+  liquibase:
+    enabled: true
+    change-log: db/changelog.yaml
