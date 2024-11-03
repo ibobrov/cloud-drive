@@ -34,12 +34,59 @@
         <h2 th:text="${directory.name}" class="text-xl font-bold"></h2>
       </div>
 
+      <!-- Добавить кнопку и модальное окно в index.html -->
+      <button id="addFolderButton" class="bg-blue-500 text-white p-2 rounded min-h-32 flex items-center justify-center">Добавить папку</button>
+
+      <div id="addFolderModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h2 class="text-xl font-bold mb-4">Добавить новую папку</h2>
+          <input type="text" id="folderNameInput" class="border p-2 w-full mb-4" placeholder="Введите имя новой папки">
+          <div class="flex justify-end">
+            <button id="cancelButton" class="bg-gray-500 text-white p-2 rounded mr-2">Отмена</button>
+            <button id="saveButton" class="bg-green-500 text-white p-2 rounded">Сохранить</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <footer class="bg-red-500 p-4 shadow-md text-center">
     <a href="https://github.com/ibobrov" class="text-white font-bold">GitHub: ibobrov</a>
   </footer>
+
+  <script>
+      document.getElementById('addFolderButton').addEventListener('click', function() {
+          document.getElementById('addFolderModal').classList.remove('hidden');
+      });
+
+      document.getElementById('cancelButton').addEventListener('click', function() {
+          document.getElementById('addFolderModal').classList.add('hidden');
+      });
+
+      document.getElementById('saveButton').addEventListener('click', function() {
+          const folderName = document.getElementById('folderNameInput').value;
+          if (folderName) {
+              fetch('/api/folders', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ name: folderName })
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          alert('Папка успешно добавлена!');
+                          location.reload();
+                      } else {
+                          alert('Ошибка при добавлении папки.');
+                      }
+                  })
+                  .catch(error => console.error('Ошибка:', error));
+          }
+      });
+  </script>
 </div>
 </body>
 </html>
