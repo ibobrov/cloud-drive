@@ -29,25 +29,11 @@
 
   <div class="container mx-auto p-12 content">
     <div class="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+
       <div th:each="directory : ${directories}" class="bg-gray-200 p-4 rounded-lg shadow-md min-h-32 flex items-center justify-center">
         <h2 th:text="${directory.name}" class="text-xl font-bold"></h2>
       </div>
 
-<!--      <div class="bg-gray-200 p-4 rounded-lg shadow-md min-h-32 flex items-center justify-center">-->
-<!--        <h2 class="text-xl font-bold">Folder 2</h2>-->
-<!--      </div>-->
-<!--      <div class="bg-gray-200 p-4 rounded-lg shadow-md min-h-32 flex items-center justify-center">-->
-<!--        <h2 class="text-xl font-bold">Folder 3</h2>-->
-<!--      </div>-->
-<!--      <div class="bg-gray-200 p-4 rounded-lg shadow-md min-h-32 flex items-center justify-center">-->
-<!--        <h2 class="text-xl font-bold">Folder 4</h2>-->
-<!--      </div>-->
-<!--      <div class="bg-gray-200 p-4 rounded-lg shadow-md min-h-32 flex items-center justify-center">-->
-<!--        <h2 class="text-xl font-bold">Folder 5</h2>-->
-<!--      </div>-->
-<!--      <div class="bg-gray-200 p-4 rounded-lg shadow-md min-h-32 flex items-center justify-center">-->
-<!--        <h2 class="text-xl font-bold">Folder 6</h2>-->
-<!--      </div>-->
     </div>
   </div>
 

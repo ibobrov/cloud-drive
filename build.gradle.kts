@@ -25,8 +25,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.liquibase:liquibase-core")
-    implementation("org.slf4j:slf4j-api:1.7.36")
-    implementation("ch.qos.logback:logback-classic:1.2.11")
     runtimeOnly("org.postgresql:postgresql")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

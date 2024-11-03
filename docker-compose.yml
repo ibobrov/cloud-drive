@@ -38,8 +38,3 @@ networks:
 volumes:
   postgres_data:
   minio-storage:
-
-
-
-
-
