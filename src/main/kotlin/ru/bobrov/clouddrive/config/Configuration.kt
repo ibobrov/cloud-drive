@@ -1,5 +1,7 @@
 package ru.bobrov.clouddrive.config
 
+import io.minio.MinioClient
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -12,18 +14,40 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import ru.bobrov.clouddrive.security.JwtAuthenticationFilter
 
 @Configuration
-class SecurityConfig {
+class Configuration : WebMvcConfigurer {
+
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*") // Разрешить все источники
+            .allowedMethods("*") // Разрешить все методы (GET, POST, PUT, DELETE и т.д.)
+            .allowedHeaders("*") // Разрешить все заголовки
+    }
+
+    @Bean
+    fun minioClient(
+        @Value("\${spring.minio.url}") url: String,
+        @Value("\${spring.minio.access-key}") accessKey: String,
+        @Value("\${spring.minio.secret-key}") secretKey: String,
+        @Value("\${spring.minio.port}") port: Int
+    ): MinioClient =
+         MinioClient.builder()
+            .endpoint(url, port, false)
+            .credentials(accessKey, secretKey)
+            .build()
+
 
     @Bean
     fun securityFilterChain(
         http: HttpSecurity,
         jwtAuthenticationFilter: JwtAuthenticationFilter,
         userDetailsService: UserDetailsService
-    ): SecurityFilterChain
-        = http
+    ): SecurityFilterChain =
+        http
         .csrf { it.disable() }
             .cors { cors ->
                 cors.configurationSource {
@@ -53,10 +77,10 @@ class SecurityConfig {
             .build()
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder
-        = BCryptPasswordEncoder()
+    fun passwordEncoder(): PasswordEncoder =
+        BCryptPasswordEncoder()
 
     @Bean
-    fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager
-        = config.authenticationManager
+    fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager =
+        config.authenticationManager
 }

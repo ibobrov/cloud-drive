@@ -59,4 +59,3 @@ class JwtAuthenticationFilter(
         const val AUTHORIZATION_HEADER_NAME: String = "Authorization"
     }
 }
-

@@ -11,16 +11,16 @@ import ru.bobrov.clouddrive.dto.FolderCreateResponse
 import ru.bobrov.clouddrive.model.Directory
 import ru.bobrov.clouddrive.repositories.DirectoryRepository
 
-@RestController
+@RestController("/api/folders")
 class FoldersController(
     val directoryRepository: DirectoryRepository
 ) {
 
-    @GetMapping("/api/folders")
+    @GetMapping
     fun findAll(): Iterable<Directory> =
         directoryRepository.findAll(Sort.by(Sort.Order.asc("name")))
 
-    @PostMapping("/api/folders")
+    @PostMapping
     fun save(@RequestBody response: FolderCreateResponse): ResponseEntity<Directory> {
         val newDirectory = directoryRepository.save(Directory(null, response.name))
         return ResponseEntity.status(HttpStatus.CREATED).body(newDirectory)
