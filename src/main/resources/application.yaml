@@ -14,6 +14,10 @@ spring:
     enabled: true
     change-log: db/changelog.yaml
 
+token:
+  signing:
+    key: ${TOKEN_SIGNING_KEY}
+
 logging:
   level:
     org.springframework:

@@ -6,4 +6,7 @@ import ru.bobrov.clouddrive.model.User
 import java.util.*
 
 @Repository
-interface UserRepository : CrudRepository<User, UUID>
+interface UserRepository : CrudRepository<User, UUID> {
+
+    fun findUserByLogin(login: String): User?
+}

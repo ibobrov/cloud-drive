@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
+      file: db/scripts/ddl_create_table_users.sql
+  - include:
       file: db/scripts/ddl_create_table_directories.sql
+  - include:
+      file: db/scripts/dml_create_default_user.sql
