@@ -1,12 +1,17 @@
 package ru.bobrov.clouddrive.config
 
 import io.minio.MinioClient
+import io.swagger.v3.oas.models.Components
+import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.oas.models.security.SecurityRequirement
+import io.swagger.v3.oas.models.security.SecurityScheme
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -18,7 +23,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import ru.bobrov.clouddrive.security.JwtAuthenticationFilter
 
+
 @Configuration
+@EnableWebSecurity
 class Configuration : WebMvcConfigurer {
 
     override fun addCorsMappings(registry: CorsRegistry) {
@@ -83,4 +90,23 @@ class Configuration : WebMvcConfigurer {
     @Bean
     fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager =
         config.authenticationManager
+
+    @Bean
+    fun openAPI(): OpenAPI {
+        return OpenAPI()
+            .addSecurityItem(
+                SecurityRequirement()
+                    .addList("bearerAuth")
+            )
+            .components(
+                Components()
+                    .addSecuritySchemes(
+                        "bearerAuth",
+                        SecurityScheme()
+                            .type(SecurityScheme.Type.HTTP)
+                            .scheme("bearer")
+                            .bearerFormat("JWT")
+                    )
+            )
+    }
 }
