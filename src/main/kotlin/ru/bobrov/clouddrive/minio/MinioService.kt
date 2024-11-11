@@ -5,13 +5,14 @@ import io.minio.MinioClient
 import io.minio.PutObjectArgs
 import io.minio.RemoveObjectArgs
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.util.*
 
-
-class MinioRepository(
+@Service
+class MinioService(
     private val minioClient: MinioClient,
     @Value("\${spring.minio.bucket}")
     private val bucketName: String

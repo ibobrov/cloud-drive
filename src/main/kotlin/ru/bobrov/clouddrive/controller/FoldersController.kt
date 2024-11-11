@@ -1,4 +1,4 @@
-package ru.bobrov.clouddrive.controllers
+package ru.bobrov.clouddrive.controller
 
 import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import ru.bobrov.clouddrive.dto.FolderCreateResponse
 import ru.bobrov.clouddrive.model.Directory
-import ru.bobrov.clouddrive.repositories.DirectoryRepository
+import ru.bobrov.clouddrive.repository.DirectoryRepository
 
 @RestController
 class FoldersController(

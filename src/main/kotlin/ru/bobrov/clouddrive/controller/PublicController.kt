@@ -1,4 +1,4 @@
-package ru.bobrov.clouddrive.controllers
+package ru.bobrov.clouddrive.controller
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
