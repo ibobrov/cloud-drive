@@ -23,7 +23,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import ru.bobrov.clouddrive.security.JwtAuthenticationFilter
 
-
 @Configuration
 @EnableWebSecurity
 class Configuration : WebMvcConfigurer {
@@ -75,7 +74,7 @@ class Configuration : WebMvcConfigurer {
             .authorizeHttpRequests { request ->
                 request
                     .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                    .requestMatchers("/public/**").permitAll()
+                    .requestMatchers("/api/public/**").permitAll()
                     .anyRequest().authenticated()
             }
             .sessionManagement { manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }

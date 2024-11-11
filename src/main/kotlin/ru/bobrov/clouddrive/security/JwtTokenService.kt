@@ -10,7 +10,7 @@ import java.util.*
 import javax.crypto.SecretKey
 
 @Service
-class TokenService(
+class JwtTokenService(
     @Value("\${token.signing.key}")
     key: String
 ) {
